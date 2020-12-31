@@ -46,6 +46,16 @@ system ("btrfs filesystem show /mnt/source");
 system ("mount $targetdisks[0] /mnt/target");
 system ("btrfs filesystem show /mnt/target");
 
-# unmount arrays and exit
-system ("umount /mnt/source");
-system ("umount /mnt/target");
+# create initial subvolume and snapshot on source
+system ("btrfs subvolume create /mnt/source/fio");
+system ("btrfs subvolume create /mnt/target/fio");
+system ("touch /mnt/source/fio/testfile1");
+system ("btrfs subvolume snapshot -r /mnt/source/fio /mnt/source/fio/snapshot_1");
+
+# initial full replication to target
+system ("btrfs send /mnt/source/fio/snapshot_1 | btrfs receive /mnt/target/fio");
+
+# incremental replication to target
+system ("touch /mnt/source/fio/testfile2");
+system ("btrfs subvolume snapshot -r /mnt/source/fio /mnt/source/fio/snapshot_2");
+system ("btrfs send -p /mnt/source/fio/snapshot_1 /mnt/source/fio/snapshot_2 | btrfs receive /mnt/target/fio");

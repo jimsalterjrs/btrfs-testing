@@ -1,0 +1,50 @@
+#!/usr/bin/perl
+
+my $source="/mnt/source/fio";
+my $target="/mnt/target/fio";
+
+my @source_subv;
+my @target_subv;
+
+my @sourcelist=`btrfs subvolume list $source | grep snapshot | sed 's/^.*path //'`;
+my @targetlist=`btrfs subvolume list $target | grep snapshot | sed 's/^.*path //'`;
+
+chomp @sourcelist;
+chomp @targetlist;
+
+# find most recent common snapshot
+my $common='';
+until ( ($common ne '') || (scalar @targetlist == 0) ) {
+	my $targetsnap = pop @targetlist;
+	my @matches = grep { /^$targetsnap$/ } @sourcelist;
+	$common = $matches[0];
+}
+
+# find most recent snapshot on source
+my $recent = pop @sourcelist;
+
+if ($common eq $recent) {
+	print "Target already contains most recent source snapshot $recent, nothing to do.\n";
+	exit 0;
+}
+
+if ($common eq '') {
+	print "Target and source do not have any matching snapshots, cannot replicate!\n";
+	exit 1;
+}
+
+print "Replicating from $common to $recent...\n";
+system ("btrfs send -p $source/$common $source/$recent | btrfs receive $target");
+
+# create initial subvolume and snapshot on source
+#system ("btrfs subvolume create /mnt/source/fio");
+#system ("touch /mnt/source/fio/testfile1");
+#system ("btrfs subvolume snapshot -r /mnt/source/fio /mnt/source/fio_1");
+
+# initial full replication to target
+#system ("btrfs send /mnt/source/fio_1 | btrfs receive /mnt/target");
+
+# incremental replication to target
+#system ("touch /mnt/source/fio/testfile2");
+#system ("btrfs subvolume snapshot -r /mnt/source/fio /mnt/source/fio_2");
+#system ("btrfs send -p /mnt/source/fio_1 /mnt/source/fio_2 | btrfs receive /mnt/target");
