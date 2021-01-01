@@ -15,6 +15,10 @@ directory=/mnt/source/fio
 # make data compressible. note: empirically confirmed this means
 # data compresses to ~~30% smaller than uncompressed, NOT
 # to ~~30% of its original size!
+#
+# this was fio's attempt at "real world compressiblity" most likely;
+# in practice ZFS LZ4 compression gets 1.33x compressratio using
+# this setting.
 buffer_compress_percentage=30
 refill_buffers
 buffer_pattern=0xdeadbeef
