@@ -12,3 +12,9 @@ rwmixwrite=75
 [job1]
 size=10G
 directory=/mnt/source/fio
+# make data compressible. note: empirically confirmed this means
+# data compresses to ~~30% smaller than uncompressed, NOT
+# to ~~30% of its original size!
+buffer_compress_percentage=30
+refill_buffers
+buffer_pattern=0xdeadbeef
