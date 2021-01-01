@@ -3,9 +3,6 @@
 my $source="/mnt/source/fio";
 my $target="/mnt/target/fio";
 
-my @source_subv;
-my @target_subv;
-
 # only list read-only snapshots on source
 my @sourcelist=`btrfs subvolume list -rs $source | grep snapshot | sed 's/^.*path //'`;
 # only list read-only on target, but include NON-snapshots, since btrfs fulls aren't snapshots
