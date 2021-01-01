@@ -1,13 +1,10 @@
 #!/usr/bin/perl
 
-my $source="/mnt/source";
-my $target="/mnt/target";
+my $source="source/fio";
+my $target="target/fio";
 
-my @source_subv;
-my @target_subv;
-
-my @sourcelist=`btrfs subvolume list -rs $source | grep snapshot | sed 's/^.*path //'`;
-my @targetlist=`btrfs subvolume list -rs $target | grep snapshot | sed 's/^.*path //'`;
+my @sourcelist=`zfs list -Hrt snap -o name $source | sed 's/.*\@//'`;
+my @targetlist=`zfs list -Hrt snap -o name $target | sed 's/.*\@//'`;
 
 chomp @sourcelist;
 chomp @targetlist;
@@ -34,6 +31,6 @@ if ($common eq '') {
 }
 
 print "Replicating from $common to $recent...\n";
-print "btrfs send -p $source/$common $source/$recent | btrfs receive $target \n";
-system ("btrfs send -p $source/$common $source/$recent | btrfs receive $target");
+print "zfs send -I $source\@$common $source\@$recent | zfs receive $target \n";
+system ("zfs send -I $source\@$common $source\@$recent | zfs receive $target");
 

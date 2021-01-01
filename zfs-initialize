@@ -1,0 +1,52 @@
+#!/usr/bin/perl
+
+# in my test server, the source pool is the four drives in the middle hotswap cage
+# and the target pool is the four drives in the right-most hotswap cage.
+
+my @sourcedisks;
+push @sourcedisks, "/dev/disk/by-id/scsi-SATA_ST12000VN0007-2G_ZCH0BSCK";
+push @sourcedisks, "/dev/disk/by-id/scsi-SATA_ST12000VN0007-2G_ZCH0BSFQ";
+push @sourcedisks, "/dev/disk/by-id/scsi-SATA_ST12000VN0007-2G_ZCH0BSN1";
+push @sourcedisks, "/dev/disk/by-id/scsi-SATA_ST12000VN0007-2G_ZCH0C0K9";
+
+my @targetdisks;
+push @targetdisks, "/dev/disk/by-id/scsi-SATA_ST12000VN0007-2G_ZCH0BSSK";
+push @targetdisks, "/dev/disk/by-id/scsi-SATA_ST12000VN0007-2G_ZCH0BSTZ";
+push @targetdisks, "/dev/disk/by-id/scsi-SATA_ST12000VN0007-2G_ZCH0BSFK";
+push @targetdisks, "/dev/disk/by-id/scsi-SATA_ST12000VN0007-2G_ZCH0BSY0";
+
+print "Validating disks and wiping labels... ";
+my $sourcedisksstring;
+my $targetdisksstring;
+foreach my $disk (@sourcedisks) {
+	if (! -e $disk) { print "WARNING: source $disk is not present in /dev/disk/by-id!\n"; exit 1; }
+	system ("wipefs -qa $disk");
+	$sourcedisksstring .= "$disk ";
+}
+foreach my $disk (@targetdisks) {
+	if (! -e $disk) { print "WARNING: target $disk is not present in /dev/disk/by-id!\n"; exit 1; }
+	system ("wipefs -qa $disk");
+	$targetdisksstring .= "$disk ";
+}
+print "all disks are present in /dev/disk/by-id and clean.\n\n";
+
+# create source and target arrays
+my $zfslevel = "raidz1";
+my $initcmd = "zpool create -oashift=12";
+print "Creating arrays... ";
+system("$initcmd source $zfslevel $sourcedisksstring");
+system("$initcmd target $zfslevel $targetdisksstring");
+print "source and target arrays created.\n\n";
+
+# set custom mountpoint and display arrays
+system ("zpool set mountpoint=/mnt/source source");
+system ("zpool set mountpoint=/mnt/target target");
+system ("zpool status source");
+system ("zpool status target");
+
+# create initial dataset and snapshot on source
+system ("zfs create source/fio");
+system ("zfs snapshot source/fio\@snapshot_1");
+
+# initial full replication to target
+system ("zfs send source/fio\@snapshot_1 | zfs receive target/fio");
