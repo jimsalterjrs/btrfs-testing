@@ -22,3 +22,6 @@ directory=/mnt/source/fio
 buffer_compress_percentage=30
 refill_buffers
 buffer_pattern=0xdeadbeef
+# make sure the test doesn't end early, with writes still pending
+# and uncommitted.
+end_fsync=1
