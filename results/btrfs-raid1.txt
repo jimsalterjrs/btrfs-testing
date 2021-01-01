@@ -1,1 +1,0 @@
-fio: file:options.c:1305, func=lstat, error=No such file or directory
