@@ -16,26 +16,33 @@ push @targetdisks, "/dev/disk/by-id/scsi-SATA_ST12000VN0007-2G_ZCH0BSFK";
 push @targetdisks, "/dev/disk/by-id/scsi-SATA_ST12000VN0007-2G_ZCH0BSY0";
 
 print "Validating disks and wiping labels... ";
-my $sourcedisksstring;
-my $targetdisksstring;
 foreach my $disk (@sourcedisks) {
 	if (! -e $disk) { print "WARNING: source $disk is not present in /dev/disk/by-id!\n"; exit 1; }
 	system ("wipefs -qa $disk");
-	$sourcedisksstring .= "$disk ";
 }
 foreach my $disk (@targetdisks) {
 	if (! -e $disk) { print "WARNING: target $disk is not present in /dev/disk/by-id!\n"; exit 1; }
 	system ("wipefs -qa $disk");
-	$targetdisksstring .= "$disk ";
 }
 print "all disks are present in /dev/disk/by-id and clean.\n\n";
 
 # create source and target arrays
-my $zfslevel = "raidz1";
 my $initcmd = "zpool create -oashift=12";
+
+# create mirrored pairs on source and target
+my $source1 = pop @sourcedisks;
+$source1 .= " " . pop @sourcedisks;
+my $source2 = pop @sourcedisks;
+$source2 .= " " . pop @sourcedisks;
+
+my $target1 = pop @targetdisks;
+$target1 .= " " . pop @targetdisks;
+my $target2 = pop @targetdisks;
+$target2 .= " " . pop @targetdisks;
+
 print "Creating arrays... ";
-system("$initcmd source $zfslevel $sourcedisksstring");
-system("$initcmd target $zfslevel $targetdisksstring");
+system("$initcmd source mirror $source1 mirror $source2");
+system("$initcmd target mirror $target1 mirror $target2");
 print "source and target arrays created.\n\n";
 
 # set custom mountpoints and recordsizes and display arrays
