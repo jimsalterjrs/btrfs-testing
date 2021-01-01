@@ -38,9 +38,11 @@ system("$initcmd source $zfslevel $sourcedisksstring");
 system("$initcmd target $zfslevel $targetdisksstring");
 print "source and target arrays created.\n\n";
 
-# set custom mountpoint and display arrays
-system ("zpool set mountpoint=/mnt/source source");
-system ("zpool set mountpoint=/mnt/target target");
+# set custom mountpoints and recordsizes and display arrays
+system ("zfs set mountpoint=/mnt/source source");
+system ("zfs set mountpoint=/mnt/target target");
+system ("zfs set recordsize=64K source");
+system ("zfs set recordsize=64K target");
 system ("zpool status source");
 system ("zpool status target");
 

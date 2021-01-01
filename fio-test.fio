@@ -1,0 +1,14 @@
+[global]
+bs=64k
+numjobs=8
+iodepth=8
+ioengine=libaio
+group_reporting
+name=fio
+rw=randrw
+rwmixread=25
+rwmixwrite=75
+
+[job1]
+size=10G
+directory=/mnt/source/fio
