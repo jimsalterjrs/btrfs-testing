@@ -1,21 +1,16 @@
 #!/usr/bin/perl
 
-my $source="/mnt/source/fio";
-my $target="/mnt/target/fio";
+my $source="/mnt/source";
+my $target="/mnt/target";
 
 my @source_subv;
 my @target_subv;
 
-# only list read-only snapshots on source
 my @sourcelist=`btrfs subvolume list -rs $source | grep snapshot | sed 's/^.*path //'`;
-# only list read-only on target, but include NON-snapshots, since btrfs fulls aren't snapshots
-my @targetlist=`btrfs subvolume list -r $target | grep snapshot | sed 's/^.*path //'`;
+my @targetlist=`btrfs subvolume list -rs $target | grep snapshot | sed 's/^.*path //'`;
 
 chomp @sourcelist;
 chomp @targetlist;
-
-print "sourcelist: @sourcelist\n";
-print "targetlist: @targetlist\n";
 
 # find most recent common snapshot
 my $common='';

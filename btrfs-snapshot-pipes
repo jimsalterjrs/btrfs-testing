@@ -1,0 +1,14 @@
+#!/usr/bin/perl
+
+print "Capturing STDOUT and STDERR.\n";
+print "executing command: btrfs subvolume snapshot -r /mnt/source /mnt/source/snapshot_demo\n";
+print "executing command: btrfs send /mnt/source/snapshot_demo | btrfs receive /mnt/target\n";
+print "\n";
+
+open STDERR, ">", "stderr.log" or die "$0: open: $!";
+open STDOUT, ">", "stdout.log" or die "$0: open: $!";
+system ("btrfs subvolume snapshot -r /mnt/source /mnt/source/snapshot_demo");
+system ("btrfs send /mnt/source/snapshot_demo | btrfs receive /mnt/target");
+close STDERR;
+close STDOUT;
+
