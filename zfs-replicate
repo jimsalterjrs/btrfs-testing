@@ -21,12 +21,12 @@ until ( ($common ne '') || (scalar @targetlist == 0) ) {
 my $recent = pop @sourcelist;
 
 if ($common eq $recent) {
-	print "Target already contains most recent source snapshot $recent, nothing to do.\n";
+	print STDERR "Target already contains most recent source snapshot $recent, nothing to do.\n";
 	exit 0;
 }
 
 if ($common eq '') {
-	print "Target and source do not have any matching snapshots, cannot replicate!\n";
+	print STDERR "Target and source do not have any matching snapshots, cannot replicate!\n";
 	exit 1;
 }
 
