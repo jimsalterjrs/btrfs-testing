@@ -26,10 +26,14 @@ my $recent = pop @sourcelist;
 my @sourcesnaps;
 $sourcesnaps[0]=$recent;
 my $snap;
-until ($snap eq $common) {
+until ($snap eq $common || scalar @sourcelist == 0) {
 	$snap = pop @sourcelist;
 	push (@sourcesnaps,$snap); 
 }
+
+#if ($snap ne $common) {
+#	die "something's wrong: exhausted \@sourcelist without finding $common!\n";
+#}
 
 
 if ($common eq $recent) {

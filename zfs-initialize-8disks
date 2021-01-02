@@ -1,0 +1,53 @@
+#!/usr/bin/perl
+
+# in my test server, the source pool is the four drives in the middle hotswap cage
+# and the target pool is the four drives in the right-most hotswap cage.
+
+my @sourcedisks;
+push @sourcedisks, "/dev/disk/by-id/scsi-SATA_ST12000VN0007-2G_ZCH0BSCK";
+push @sourcedisks, "/dev/disk/by-id/scsi-SATA_ST12000VN0007-2G_ZCH0BSFQ";
+push @sourcedisks, "/dev/disk/by-id/scsi-SATA_ST12000VN0007-2G_ZCH0BSN1";
+push @sourcedisks, "/dev/disk/by-id/scsi-SATA_ST12000VN0007-2G_ZCH0C0K9";
+push @sourcedisks, "/dev/disk/by-id/scsi-SATA_ST12000VN0007-2G_ZCH0BSSK";
+push @sourcedisks, "/dev/disk/by-id/scsi-SATA_ST12000VN0007-2G_ZCH0BSTZ";
+push @sourcedisks, "/dev/disk/by-id/scsi-SATA_ST12000VN0007-2G_ZCH0BSFK";
+push @sourcedisks, "/dev/disk/by-id/scsi-SATA_ST12000VN0007-2G_ZCH0BSY0";
+
+print "Validating disks and wiping labels... ";
+foreach my $disk (@sourcedisks) {
+	if (! -e $disk) { print "WARNING: source $disk is not present in /dev/disk/by-id!\n"; exit 1; }
+	system ("wipefs -qa $disk");
+}
+foreach my $disk (@targetdisks) {
+	if (! -e $disk) { print "WARNING: target $disk is not present in /dev/disk/by-id!\n"; exit 1; }
+	system ("wipefs -qa $disk");
+}
+print "all disks are present in /dev/disk/by-id and clean.\n\n";
+
+# create source and target arrays
+my $initcmd = "zpool create -oashift=12";
+
+# create mirrored pairs on source
+my $source1 = pop @sourcedisks;
+$source1 .= " " . pop @sourcedisks;
+my $source2 = pop @sourcedisks;
+$source2 .= " " . pop @sourcedisks;
+my $source3 = pop @sourcedisks;
+$source3 .= " " . pop @sourcedisks;
+my $source4 = pop @sourcedisks;
+$source4 .= " " . pop @sourcedisks;
+
+print "Creating arrays... ";
+system("$initcmd source mirror $source1 mirror $source2 mirror $source3 mirror $source4");
+print "eight-disk source array created.\n\n";
+
+# set custom mountpoints, then display arrays
+system ("zfs set mountpoint=/mnt/source source");
+system ("zpool status source");
+
+# create initial dataset, set recordsize and compression if desired, 
+# and snapshot on source
+system ("zfs create source/fio");
+system ("zfs set recordsize=64K source/fio");
+#system ("zfs set compress=lz4 source/fio");
+system ("zfs snapshot source/fio\@snapshot_1");
