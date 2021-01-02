@@ -1,0 +1,189 @@
+root@jrs-dr0:/home/jrs/btrfs-testing# ./zfs-initialize ; fio *fio | tee results/zfs-mirrors-64k-uncompressed.txt ; zpool destroy source ; zpool destroy target ; ./btrfs-initialize ; fio *fio | tee results/btrfs-raid1-uncompressed.txt
+Validating disks and wiping labels... /dev/disk/by-id/scsi-SATA_ST12000VN0007-2G_ZCH0BSCK: calling ioctl to re-read partition table: Success
+/dev/disk/by-id/scsi-SATA_ST12000VN0007-2G_ZCH0BSFQ: calling ioctl to re-read partition table: Success
+/dev/disk/by-id/scsi-SATA_ST12000VN0007-2G_ZCH0BSN1: calling ioctl to re-read partition table: Success
+/dev/disk/by-id/scsi-SATA_ST12000VN0007-2G_ZCH0C0K9: calling ioctl to re-read partition table: Success
+/dev/disk/by-id/scsi-SATA_ST12000VN0007-2G_ZCH0BSSK: calling ioctl to re-read partition table: Success
+/dev/disk/by-id/scsi-SATA_ST12000VN0007-2G_ZCH0BSTZ: calling ioctl to re-read partition table: Success
+/dev/disk/by-id/scsi-SATA_ST12000VN0007-2G_ZCH0BSFK: calling ioctl to re-read partition table: Success
+/dev/disk/by-id/scsi-SATA_ST12000VN0007-2G_ZCH0BSY0: calling ioctl to re-read partition table: Success
+all disks are present in /dev/disk/by-id and clean.
+
+Creating arrays... source and target arrays created.
+
+  pool: source
+ state: ONLINE
+  scan: none requested
+config:
+
+	NAME                                     STATE     READ WRITE CKSUM
+	source                                   ONLINE       0     0     0
+	  mirror-0                               ONLINE       0     0     0
+	    scsi-SATA_ST12000VN0007-2G_ZCH0C0K9  ONLINE       0     0     0
+	    scsi-SATA_ST12000VN0007-2G_ZCH0BSN1  ONLINE       0     0     0
+	  mirror-1                               ONLINE       0     0     0
+	    scsi-SATA_ST12000VN0007-2G_ZCH0BSFQ  ONLINE       0     0     0
+	    scsi-SATA_ST12000VN0007-2G_ZCH0BSCK  ONLINE       0     0     0
+
+errors: No known data errors
+  pool: target
+ state: ONLINE
+  scan: none requested
+config:
+
+	NAME                                     STATE     READ WRITE CKSUM
+	target                                   ONLINE       0     0     0
+	  mirror-0                               ONLINE       0     0     0
+	    scsi-SATA_ST12000VN0007-2G_ZCH0BSY0  ONLINE       0     0     0
+	    scsi-SATA_ST12000VN0007-2G_ZCH0BSFK  ONLINE       0     0     0
+	  mirror-1                               ONLINE       0     0     0
+	    scsi-SATA_ST12000VN0007-2G_ZCH0BSTZ  ONLINE       0     0     0
+	    scsi-SATA_ST12000VN0007-2G_ZCH0BSSK  ONLINE       0     0     0
+
+errors: No known data errors
+tee: results/zfs-mirrors-64k-uncompressed.txt: No such file or directory
+job1: (g=0): rw=randrw, bs=(R) 64.0KiB-64.0KiB, (W) 64.0KiB-64.0KiB, (T) 64.0KiB-64.0KiB, ioengine=libaio, iodepth=8
+...
+fio-3.16
+Starting 8 processes
+job1: Laying out IO file (1 file / 10240MiB)
+job1: Laying out IO file (1 file / 10240MiB)
+job1: Laying out IO file (1 file / 10240MiB)
+job1: Laying out IO file (1 file / 10240MiB)
+job1: Laying out IO file (1 file / 10240MiB)
+job1: Laying out IO file (1 file / 10240MiB)
+job1: Laying out IO file (1 file / 10240MiB)
+job1: Laying out IO file (1 file / 10240MiB)
+
+job1: (groupid=0, jobs=8): err= 0: pid=1387509: Fri Jan  1 18:22:07 2021
+  read: IOPS=477, BW=29.9MiB/s (31.3MB/s)(20.0GiB/685745msec)
+    slat (usec): min=12, max=885332, avg=15426.42, stdev=41877.55
+    clat (usec): min=123, max=1025.3k, avg=27226.37, stdev=58733.66
+     lat (usec): min=190, max=1030.1k, avg=42653.76, stdev=73961.88
+    clat percentiles (usec):
+     |  1.00th=[   433],  5.00th=[   553], 10.00th=[   594], 20.00th=[  4621],
+     | 30.00th=[  8979], 40.00th=[ 12911], 50.00th=[ 17171], 60.00th=[ 22414],
+     | 70.00th=[ 28705], 80.00th=[ 37487], 90.00th=[ 53740], 95.00th=[ 71828],
+     | 99.00th=[137364], 99.50th=[246416], 99.90th=[834667], 99.95th=[868221],
+     | 99.99th=[918553]
+   bw (  KiB/s): min=  826, max=109789, per=100.00%, avg=32483.55, stdev=2534.80, samples=9717
+   iops        : min=   10, max= 1714, avg=506.30, stdev=39.64, samples=9717
+  write: IOPS=1433, BW=89.6MiB/s (93.9MB/s)(59.0GiB/685745msec); 0 zone resets
+    slat (usec): min=18, max=109435, avg=63.75, stdev=442.84
+    clat (usec): min=2, max=1009.2k, avg=27618.44, stdev=60323.76
+     lat (usec): min=44, max=1009.2k, avg=27682.53, stdev=60329.78
+    clat percentiles (usec):
+     |  1.00th=[   416],  5.00th=[   537], 10.00th=[   570], 20.00th=[  4686],
+     | 30.00th=[  9110], 40.00th=[ 13042], 50.00th=[ 17433], 60.00th=[ 22676],
+     | 70.00th=[ 28967], 80.00th=[ 38011], 90.00th=[ 53740], 95.00th=[ 72877],
+     | 99.00th=[139461], 99.50th=[692061], 99.90th=[843056], 99.95th=[876610],
+     | 99.99th=[926942]
+   bw (  KiB/s): min=  892, max=353306, per=100.00%, avg=96914.42, stdev=7873.66, samples=9776
+   iops        : min=   12, max= 5519, avg=1513.02, stdev=123.05, samples=9776
+  lat (usec)   : 4=0.01%, 100=0.01%, 250=0.06%, 500=2.15%, 750=13.54%
+  lat (usec)   : 1000=0.87%
+  lat (msec)   : 2=0.27%, 4=1.93%, 10=13.71%, 20=22.91%, 50=32.81%
+  lat (msec)   : 100=9.54%, 250=1.68%, 500=0.01%, 750=0.13%, 1000=0.38%
+  lat (msec)   : 2000=0.01%
+  cpu          : usr=0.69%, sys=1.65%, ctx=332988, majf=0, minf=109
+  IO depths    : 1=0.1%, 2=0.1%, 4=0.1%, 8=100.0%, 16=0.0%, 32=0.0%, >=64=0.0%
+     submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     complete  : 0=0.0%, 4=100.0%, 8=0.1%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     issued rwts: total=327734,982986,0,8 short=0,0,0,0 dropped=0,0,0,0
+     latency   : target=0, window=0, percentile=100.00%, depth=8
+
+Run status group 0 (all jobs):
+   READ: bw=29.9MiB/s (31.3MB/s), 29.9MiB/s-29.9MiB/s (31.3MB/s-31.3MB/s), io=20.0GiB (21.5GB), run=685745-685745msec
+  WRITE: bw=89.6MiB/s (93.9MB/s), 89.6MiB/s-89.6MiB/s (93.9MB/s-93.9MB/s), io=59.0GiB (64.4GB), run=685745-685745msec
+Validating disks and wiping labels... /dev/disk/by-id/scsi-SATA_ST12000VN0007-2G_ZCH0BSCK: calling ioctl to re-read partition table: Success
+/dev/disk/by-id/scsi-SATA_ST12000VN0007-2G_ZCH0BSFQ: calling ioctl to re-read partition table: Success
+/dev/disk/by-id/scsi-SATA_ST12000VN0007-2G_ZCH0BSN1: calling ioctl to re-read partition table: Success
+/dev/disk/by-id/scsi-SATA_ST12000VN0007-2G_ZCH0C0K9: calling ioctl to re-read partition table: Success
+/dev/disk/by-id/scsi-SATA_ST12000VN0007-2G_ZCH0BSSK: calling ioctl to re-read partition table: Success
+/dev/disk/by-id/scsi-SATA_ST12000VN0007-2G_ZCH0BSTZ: calling ioctl to re-read partition table: Success
+/dev/disk/by-id/scsi-SATA_ST12000VN0007-2G_ZCH0BSFK: calling ioctl to re-read partition table: Success
+/dev/disk/by-id/scsi-SATA_ST12000VN0007-2G_ZCH0BSY0: calling ioctl to re-read partition table: Success
+all disks are present in /dev/disk/by-id and clean.
+
+Creating arrays... ERROR: superblock magic doesn't match
+ERROR: superblock magic doesn't match
+ERROR: superblock magic doesn't match
+ERROR: superblock magic doesn't match
+ERROR: superblock magic doesn't match
+source and target arrays created.
+
+Label: 'source'  uuid: 1237c15f-fb0a-485f-a77a-0820b7eb39d4
+	Total devices 4 FS bytes used 128.00KiB
+	devid    1 size 10.91TiB used 0.00B path /dev/sdk
+	devid    2 size 10.91TiB used 0.00B path /dev/sdh
+	devid    3 size 10.91TiB used 2.01GiB path /dev/sdi
+	devid    4 size 10.91TiB used 2.01GiB path /dev/sdj
+
+Label: 'target'  uuid: 20983449-9f22-442f-a24d-956a135bee9e
+	Total devices 4 FS bytes used 128.00KiB
+	devid    1 size 10.91TiB used 0.00B path /dev/sde
+	devid    2 size 10.91TiB used 0.00B path /dev/sdd
+	devid    3 size 10.91TiB used 2.01GiB path /dev/sdf
+	devid    4 size 10.91TiB used 2.01GiB path /dev/sdg
+
+Create subvolume '/mnt/source/fio'
+Create a readonly snapshot of '/mnt/source/fio' in '/mnt/source/fio/snapshot_1'
+Create subvolume '/mnt/target/fio'
+At subvol /mnt/source/fio/snapshot_1
+At subvol snapshot_1
+tee: results/btrfs-raid1-uncompressed.txt: No such file or directory
+job1: (g=0): rw=randrw, bs=(R) 64.0KiB-64.0KiB, (W) 64.0KiB-64.0KiB, (T) 64.0KiB-64.0KiB, ioengine=libaio, iodepth=8
+...
+fio-3.16
+Starting 8 processes
+job1: Laying out IO file (1 file / 10240MiB)
+job1: Laying out IO file (1 file / 10240MiB)
+job1: Laying out IO file (1 file / 10240MiB)
+job1: Laying out IO file (1 file / 10240MiB)
+job1: Laying out IO file (1 file / 10240MiB)
+job1: Laying out IO file (1 file / 10240MiB)
+job1: Laying out IO file (1 file / 10240MiB)
+job1: Laying out IO file (1 file / 10240MiB)
+
+job1: (groupid=0, jobs=8): err= 0: pid=2006185: Fri Jan  1 18:36:24 2021
+  read: IOPS=535, BW=33.4MiB/s (35.1MB/s)(20.0GiB/612577msec)
+    slat (usec): min=237, max=2533.6k, avg=14228.99, stdev=68395.13
+    clat (usec): min=90, max=5433.7k, avg=25214.36, stdev=100738.35
+     lat (usec): min=557, max=5740.7k, avg=39444.15, stdev=132072.38
+    clat percentiles (usec):
+     |  1.00th=[    486],  5.00th=[    510], 10.00th=[    562],
+     | 20.00th=[   4883], 30.00th=[   8225], 40.00th=[  11207],
+     | 50.00th=[  14877], 60.00th=[  18744], 70.00th=[  23987],
+     | 80.00th=[  30802], 90.00th=[  42730], 95.00th=[  54789],
+     | 99.00th=[ 141558], 99.50th=[ 354419], 99.90th=[1769997],
+     | 99.95th=[2533360], 99.99th=[3674211]
+   bw (  KiB/s): min= 1019, max=97382, per=100.00%, avg=40289.35, stdev=2098.49, samples=8323
+   iops        : min=   11, max= 1521, avg=629.15, stdev=32.79, samples=8323
+  write: IOPS=1604, BW=100MiB/s (105MB/s)(59.0GiB/612577msec); 0 zone resets
+    slat (usec): min=14, max=23445, avg=46.23, stdev=40.25
+    clat (nsec): min=1653, max=5725.5M, avg=25353716.60, stdev=103146411.42
+     lat (usec): min=30, max=5725.5k, avg=25400.15, stdev=103146.67
+    clat percentiles (usec):
+     |  1.00th=[    465],  5.00th=[    490], 10.00th=[    537],
+     | 20.00th=[   4948], 30.00th=[   8225], 40.00th=[  11207],
+     | 50.00th=[  14877], 60.00th=[  19006], 70.00th=[  23987],
+     | 80.00th=[  31065], 90.00th=[  42730], 95.00th=[  54789],
+     | 99.00th=[ 139461], 99.50th=[ 354419], 99.90th=[1769997],
+     | 99.95th=[2533360], 99.99th=[3841983]
+   bw (  KiB/s): min= 1021, max=313134, per=100.00%, avg=119024.33, stdev=7000.30, samples=8449
+   iops        : min=   13, max= 4892, avg=1859.52, stdev=109.39, samples=8449
+  lat (usec)   : 2=0.01%, 4=0.01%, 100=0.01%, 250=0.07%, 500=5.98%
+  lat (usec)   : 750=7.28%, 1000=0.49%
+  lat (msec)   : 2=0.25%, 4=3.65%, 10=18.51%, 20=26.15%, 50=31.08%
+  lat (msec)   : 100=5.26%, 250=0.58%, 500=0.37%, 750=0.11%, 1000=0.04%
+  lat (msec)   : 2000=0.10%, >=2000=0.08%
+  cpu          : usr=0.69%, sys=1.63%, ctx=1259150, majf=0, minf=113
+  IO depths    : 1=0.1%, 2=0.1%, 4=0.1%, 8=100.0%, 16=0.0%, 32=0.0%, >=64=0.0%
+     submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     complete  : 0=0.0%, 4=100.0%, 8=0.1%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     issued rwts: total=327734,982986,0,8 short=0,0,0,0 dropped=0,0,0,0
+     latency   : target=0, window=0, percentile=100.00%, depth=8
+
+Run status group 0 (all jobs):
+   READ: bw=33.4MiB/s (35.1MB/s), 33.4MiB/s-33.4MiB/s (35.1MB/s-35.1MB/s), io=20.0GiB (21.5GB), run=612577-612577msec
+  WRITE: bw=100MiB/s (105MB/s), 100MiB/s-100MiB/s (105MB/s-105MB/s), io=59.0GiB (64.4GB), run=612577-612577msec

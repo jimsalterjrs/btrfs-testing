@@ -45,16 +45,17 @@ system("$initcmd source mirror $source1 mirror $source2");
 system("$initcmd target mirror $target1 mirror $target2");
 print "source and target arrays created.\n\n";
 
-# set custom mountpoints and recordsizes and display arrays
+# set custom mountpoints, then display arrays
 system ("zfs set mountpoint=/mnt/source source");
 system ("zfs set mountpoint=/mnt/target target");
-system ("zfs set recordsize=64K source");
-system ("zfs set recordsize=64K target");
 system ("zpool status source");
 system ("zpool status target");
 
-# create initial dataset and snapshot on source
+# create initial dataset, set recordsize and compression if desired, 
+# and snapshot on source
 system ("zfs create source/fio");
+system ("zfs set recordsize=64K source/fio");
+system ("zfs set compress=lz4 source/fio");
 system ("zfs snapshot source/fio\@snapshot_1");
 
 # initial full replication to target

@@ -1,0 +1,30 @@
+[global]
+bs=64k
+numjobs=8
+iodepth=8
+ioengine=libaio
+group_reporting
+name=fio
+rw=randrw
+rwmixread=25
+rwmixwrite=75
+# limit run to 5m
+time_based
+runtime=300
+
+[job1]
+size=10G
+directory=/mnt/source/fio
+# make data compressible. note: empirically confirmed this means
+# data compresses to ~~30% smaller than uncompressed, NOT
+# to ~~30% of its original size!
+#
+# this was fio's attempt at "real world compressiblity" most likely;
+# in practice ZFS LZ4 compression gets 1.33x compressratio using
+# this setting.
+buffer_compress_percentage=30
+refill_buffers
+buffer_pattern=0xdeadbeef
+# make sure the test doesn't end early, with writes still pending
+# and uncommitted.
+end_fsync=1

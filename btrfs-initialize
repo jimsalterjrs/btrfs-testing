@@ -41,9 +41,10 @@ print "source and target arrays created.\n\n";
 # mount and display arrays
 mkdir "/mnt/source";
 mkdir "/mnt/target";
-system ("mount $sourcedisks[0] /mnt/source");
+# compression is specified in the mount options for btrfs - enable or disable here
+system ("mount -o compress=lzo $sourcedisks[0] /mnt/source");
 system ("btrfs filesystem show /mnt/source");
-system ("mount $targetdisks[0] /mnt/target");
+system ("mount -o compress=lzo $targetdisks[0] /mnt/target");
 system ("btrfs filesystem show /mnt/target");
 
 # create initial subvolume and snapshot on source
