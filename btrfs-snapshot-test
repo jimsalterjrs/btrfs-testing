@@ -36,7 +36,6 @@ system ("kill $taskpid[2]");
 
 #output snapshot list to results file
 system ("btrfs subvolume list /mnt/source/fio >> $outfile");
-system ("btrfs subvolume list /mnt/target/fio >> $outfile");
 
 exit 0;
 

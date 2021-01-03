@@ -68,16 +68,20 @@ sub deleter {
 	open STDOUT, ">", "/dev/null";
 
 	# list all snapshots, then delete them individually
-	my @snaps = `btrfs subvolume list /mnt/source/fio | grep snapshot | sed 's/^.*path //'`;
-	foreach my $snap (@snaps) {
-		system ("btrfs subvolume delete /mnt/source/fio/$snap");
-	}
-
 	# make sure they're all gone--don't exit until btrfs subvolume list shows no more snapshots
 	# for /mnt/source/fio
+
+	@snaps = `btrfs subvolume list /mnt/source/fio | grep snapshot | sed 's/^.*path //'`;
 	while (scalar @snaps) {
-		@snaps = `btrfs subvolume list /mnt/source/fio | grep snapshot | sed 's/^.*path //'`;
+		foreach my $snap (@snaps) {
+			system ("btrfs subvolume delete /mnt/source/fio/$snap");
+		}
+
+		# be kind--give it a second to stabilize
 		sleep 1;
+
+		# reload list of snaps--we'll exit if it's empty, if not, we begin again, yay
+		@snaps = `btrfs subvolume list /mnt/source/fio | grep snapshot | sed 's/^.*path //'`;
 	}
 
 	# belt and suspenders--make sure no snapshot deletion processes are still running either

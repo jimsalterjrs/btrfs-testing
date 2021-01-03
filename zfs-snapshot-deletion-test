@@ -64,20 +64,24 @@ sub fiotester {
 
 sub deleter {
 	# list all snapshots, then delete them individually
-	my @snaps = `zfs list -Hrt snapshot source/fio | awk '{print \$1}'`;
-	foreach my $snap (@snaps) {
-		system ("zfs destroy $snap");
-	}
-
 	# make sure they're all gone--don't exit until zfs list shows no more snapshots
 	# for /mnt/source/fio
+
+	my @snaps = `zfs list -Hrt snapshot source/fio | awk '{print \$1}'`;
 	while (scalar @snaps) {
-		@snaps = `zfs list -Hrt snapshot source/fio`;
+		foreach my $snap (@snaps) {
+			# hopefully, the -d will ensure the snapshot is destroyed immediately, not deferred
+			system ("zfs destroy -d $snap");
+		}
+
+		# be kind--give it a second to stabilize
 		sleep 1;
+
+		# fetch the snap list again... if it's not empty yet, we'll start all over
+		@snaps = `zfs list -Hrt snapshot source/fio | awk '{print \$1}'`;
 	}
 
 	# belt and suspenders--make sure no snapshot deletion processes are still running either.
-	# this is absolutely necessary under zfs, due to background snapshot destruction!
 	my $ps = 'begin';
 	while ($ps ne '') { $ps = `ps wwaux | grep 'zfs destroy source/fio' | grep -v grep`; }
 
