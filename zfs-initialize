@@ -55,7 +55,7 @@ system ("zpool status target");
 # and snapshot on source
 system ("zfs create source/fio");
 system ("zfs set recordsize=64K source/fio");
-system ("zfs set compress=lz4 source/fio");
+#system ("zfs set compress=lz4 source/fio");
 system ("zfs snapshot source/fio\@snapshot_1");
 
 # initial full replication to target
