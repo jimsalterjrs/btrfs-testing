@@ -51,8 +51,8 @@ exit 0;
 #####################################################################
 
 sub fiotester {
-	open STDERR, "|", "tee -a $outfile";
-	open STDOUT, "|", "tee -a $outfile";
+	open STDERR, "-|", "tee -a $outfile";
+	open STDOUT, "-|", "tee -a $outfile";
 	system ("fio fio-test.fio");
 	exit 0;
 }
