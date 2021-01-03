@@ -1,0 +1,438 @@
+job1: (g=0): rw=randrw, bs=(R) 64.0KiB-64.0KiB, (W) 64.0KiB-64.0KiB, (T) 64.0KiB-64.0KiB, ioengine=libaio, iodepth=8
+...
+fio-3.16
+Starting 8 processes
+job1: Laying out IO file (1 file / 10240MiB)
+job1: Laying out IO file (1 file / 10240MiB)
+job1: Laying out IO file (1 file / 10240MiB)
+job1: Laying out IO file (1 file / 10240MiB)
+job1: Laying out IO file (1 file / 10240MiB)
+job1: Laying out IO file (1 file / 10240MiB)
+job1: Laying out IO file (1 file / 10240MiB)
+job1: Laying out IO file (1 file / 10240MiB)
+
+job1: (groupid=0, jobs=8): err= 0: pid=9019: Sat Jan  2 20:11:10 2021
+  read: IOPS=293, BW=18.3MiB/s (19.2MB/s)(20.0GiB/1117284msec)
+    slat (usec): min=244, max=2565.7k, avg=23940.80, stdev=78026.14
+    clat (usec): min=85, max=6426.9k, avg=42180.59, stdev=112241.30
+     lat (usec): min=500, max=6854.8k, avg=66122.25, stdev=143200.93
+    clat percentiles (usec):
+     |  1.00th=[    445],  5.00th=[    506], 10.00th=[    578],
+     | 20.00th=[   5211], 30.00th=[   8979], 40.00th=[  12911],
+     | 50.00th=[  17695], 60.00th=[  23725], 70.00th=[  31851],
+     | 80.00th=[  45351], 90.00th=[  82314], 95.00th=[ 156238],
+     | 99.00th=[ 442500], 99.50th=[ 624952], 99.90th=[1434452],
+     | 99.95th=[1920992], 99.99th=[3372221]
+   bw (  KiB/s): min= 1017, max=80889, per=100.00%, avg=23069.51, stdev=1756.70, samples=14559
+   iops        : min=   12, max= 1262, avg=359.86, stdev=27.45, samples=14559
+  write: IOPS=879, BW=54.0MiB/s (57.7MB/s)(59.0GiB/1117284msec); 0 zone resets
+    slat (usec): min=14, max=201059, avg=45.52, stdev=203.08
+    clat (nsec): min=1834, max=6426.9M, avg=42368218.56, stdev=113485633.40
+     lat (usec): min=33, max=6426.0k, avg=42413.96, stdev=113486.43
+    clat percentiles (usec):
+     |  1.00th=[    424],  5.00th=[    482], 10.00th=[    553],
+     | 20.00th=[   5211], 30.00th=[   8979], 40.00th=[  13042],
+     | 50.00th=[  17695], 60.00th=[  23725], 70.00th=[  31851],
+     | 80.00th=[  45351], 90.00th=[  82314], 95.00th=[ 156238],
+     | 99.00th=[ 442500], 99.50th=[ 633340], 99.90th=[1434452],
+     | 99.95th=[2197816], 99.99th=[3439330]
+   bw (  KiB/s): min= 1014, max=261859, per=100.00%, avg=68537.18, stdev=5625.52, samples=14701
+   iops        : min=    9, max= 4089, avg=1070.39, stdev=87.90, samples=14701
+  lat (usec)   : 2=0.01%, 4=0.01%, 100=0.01%, 250=0.09%, 500=5.76%
+  lat (usec)   : 750=7.40%, 1000=0.54%
+  lat (msec)   : 2=0.24%, 4=3.24%, 10=15.59%, 20=21.36%, 50=28.01%
+  lat (msec)   : 100=9.65%, 250=5.41%, 500=1.93%, 750=0.43%, 1000=0.16%
+  lat (msec)   : 2000=0.15%, >=2000=0.05%
+  cpu          : usr=0.43%, sys=0.93%, ctx=1029565, majf=0, minf=104
+  IO depths    : 1=0.1%, 2=0.1%, 4=0.1%, 8=100.0%, 16=0.0%, 32=0.0%, >=64=0.0%
+     submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     complete  : 0=0.0%, 4=100.0%, 8=0.1%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     issued rwts: total=327734,982986,0,8 short=0,0,0,0 dropped=0,0,0,0
+     latency   : target=0, window=0, percentile=100.00%, depth=8
+
+Run status group 0 (all jobs):
+   READ: bw=18.3MiB/s (19.2MB/s), 18.3MiB/s-18.3MiB/s (19.2MB/s-19.2MB/s), io=20.0GiB (21.5GB), run=1117284-1117284msec
+  WRITE: bw=54.0MiB/s (57.7MB/s), 54.0MiB/s-54.0MiB/s (57.7MB/s-57.7MB/s), io=59.0GiB (64.4GB), run=1117284-1117284msec
+ID 256 gen 285 top level 5 path fio
+ID 259 gen 7 top level 256 path snapshot_1
+ID 260 gen 8 top level 256 path snapshot_2
+ID 273 gen 9 top level 256 path snapshot_3
+ID 277 gen 11 top level 256 path snapshot_4
+ID 278 gen 12 top level 256 path snapshot_5
+ID 279 gen 13 top level 256 path snapshot_8
+ID 280 gen 14 top level 256 path snapshot_9
+ID 281 gen 15 top level 256 path snapshot_6
+ID 282 gen 16 top level 256 path snapshot_7
+ID 290 gen 17 top level 256 path snapshot_10
+ID 293 gen 19 top level 256 path snapshot_17
+ID 294 gen 20 top level 256 path snapshot_14
+ID 295 gen 21 top level 256 path snapshot_12
+ID 296 gen 22 top level 256 path snapshot_16
+ID 297 gen 23 top level 256 path snapshot_20
+ID 298 gen 24 top level 256 path snapshot_11
+ID 299 gen 25 top level 256 path snapshot_19
+ID 300 gen 26 top level 256 path snapshot_15
+ID 301 gen 27 top level 256 path snapshot_13
+ID 302 gen 28 top level 256 path snapshot_18
+ID 311 gen 29 top level 256 path snapshot_21
+ID 314 gen 31 top level 256 path snapshot_29
+ID 315 gen 32 top level 256 path snapshot_23
+ID 316 gen 33 top level 256 path snapshot_24
+ID 317 gen 34 top level 256 path snapshot_27
+ID 318 gen 35 top level 256 path snapshot_26
+ID 319 gen 36 top level 256 path snapshot_28
+ID 320 gen 37 top level 256 path snapshot_25
+ID 321 gen 38 top level 256 path snapshot_22
+ID 328 gen 39 top level 256 path snapshot_30
+ID 330 gen 40 top level 256 path snapshot_31
+ID 340 gen 41 top level 256 path snapshot_32
+ID 341 gen 42 top level 256 path snapshot_33
+ID 342 gen 43 top level 256 path snapshot_38
+ID 343 gen 44 top level 256 path snapshot_34
+ID 344 gen 45 top level 256 path snapshot_35
+ID 345 gen 46 top level 256 path snapshot_36
+ID 356 gen 47 top level 256 path snapshot_37
+ID 360 gen 48 top level 256 path snapshot_40
+ID 368 gen 49 top level 256 path snapshot_39
+ID 369 gen 50 top level 256 path snapshot_43
+ID 370 gen 51 top level 256 path snapshot_49
+ID 371 gen 52 top level 256 path snapshot_46
+ID 372 gen 53 top level 256 path snapshot_41
+ID 373 gen 54 top level 256 path snapshot_47
+ID 374 gen 55 top level 256 path snapshot_42
+ID 375 gen 56 top level 256 path snapshot_45
+ID 376 gen 57 top level 256 path snapshot_48
+ID 377 gen 58 top level 256 path snapshot_44
+ID 390 gen 59 top level 256 path snapshot_50
+ID 395 gen 61 top level 256 path snapshot_51
+ID 396 gen 62 top level 256 path snapshot_58
+ID 397 gen 63 top level 256 path snapshot_53
+ID 398 gen 64 top level 256 path snapshot_56
+ID 399 gen 65 top level 256 path snapshot_52
+ID 400 gen 66 top level 256 path snapshot_57
+ID 401 gen 67 top level 256 path snapshot_54
+ID 402 gen 68 top level 256 path snapshot_55
+ID 408 gen 69 top level 256 path snapshot_60
+ID 418 gen 70 top level 256 path snapshot_61
+ID 419 gen 71 top level 256 path snapshot_59
+ID 420 gen 72 top level 256 path snapshot_62
+ID 421 gen 73 top level 256 path snapshot_65
+ID 422 gen 74 top level 256 path snapshot_67
+ID 423 gen 75 top level 256 path snapshot_66
+ID 424 gen 76 top level 256 path snapshot_68
+ID 425 gen 77 top level 256 path snapshot_64
+ID 426 gen 78 top level 256 path snapshot_63
+ID 427 gen 79 top level 256 path snapshot_69
+ID 438 gen 80 top level 256 path snapshot_70
+ID 444 gen 82 top level 256 path snapshot_75
+ID 445 gen 83 top level 256 path snapshot_73
+ID 446 gen 84 top level 256 path snapshot_76
+ID 447 gen 85 top level 256 path snapshot_72
+ID 448 gen 86 top level 256 path snapshot_71
+ID 449 gen 87 top level 256 path snapshot_74
+ID 450 gen 88 top level 256 path snapshot_77
+ID 451 gen 89 top level 256 path snapshot_78
+ID 452 gen 90 top level 256 path snapshot_79
+ID 453 gen 91 top level 256 path snapshot_80
+ID 454 gen 92 top level 256 path snapshot_81
+ID 455 gen 93 top level 256 path snapshot_82
+ID 456 gen 94 top level 256 path snapshot_83
+ID 457 gen 95 top level 256 path snapshot_84
+ID 458 gen 96 top level 256 path snapshot_85
+ID 459 gen 97 top level 256 path snapshot_86
+ID 460 gen 98 top level 256 path snapshot_87
+ID 461 gen 99 top level 256 path snapshot_88
+ID 462 gen 100 top level 256 path snapshot_89
+ID 463 gen 101 top level 256 path snapshot_90
+ID 464 gen 102 top level 256 path snapshot_92
+ID 465 gen 103 top level 256 path snapshot_91
+ID 466 gen 104 top level 256 path snapshot_93
+ID 467 gen 105 top level 256 path snapshot_94
+ID 468 gen 106 top level 256 path snapshot_96
+ID 469 gen 107 top level 256 path snapshot_95
+ID 470 gen 108 top level 256 path snapshot_98
+ID 471 gen 109 top level 256 path snapshot_99
+ID 472 gen 110 top level 256 path snapshot_97
+ID 473 gen 111 top level 256 path snapshot_101
+ID 474 gen 112 top level 256 path snapshot_100
+ID 475 gen 113 top level 256 path snapshot_102
+ID 476 gen 114 top level 256 path snapshot_103
+ID 477 gen 115 top level 256 path snapshot_104
+ID 478 gen 116 top level 256 path snapshot_105
+ID 479 gen 117 top level 256 path snapshot_106
+ID 481 gen 118 top level 256 path snapshot_107
+ID 482 gen 119 top level 256 path snapshot_108
+ID 483 gen 120 top level 256 path snapshot_109
+ID 485 gen 121 top level 256 path snapshot_110
+ID 486 gen 122 top level 256 path snapshot_111
+ID 487 gen 123 top level 256 path snapshot_112
+ID 489 gen 124 top level 256 path snapshot_113
+ID 490 gen 125 top level 256 path snapshot_114
+ID 491 gen 126 top level 256 path snapshot_115
+ID 493 gen 127 top level 256 path snapshot_116
+ID 494 gen 128 top level 256 path snapshot_117
+ID 495 gen 129 top level 256 path snapshot_118
+ID 497 gen 130 top level 256 path snapshot_119
+ID 498 gen 131 top level 256 path snapshot_120
+ID 499 gen 132 top level 256 path snapshot_121
+ID 501 gen 133 top level 256 path snapshot_122
+ID 502 gen 134 top level 256 path snapshot_123
+ID 504 gen 135 top level 256 path snapshot_124
+ID 506 gen 136 top level 256 path snapshot_125
+ID 507 gen 137 top level 256 path snapshot_126
+ID 508 gen 138 top level 256 path snapshot_127
+ID 510 gen 139 top level 256 path snapshot_128
+ID 511 gen 140 top level 256 path snapshot_129
+ID 512 gen 141 top level 256 path snapshot_130
+ID 514 gen 142 top level 256 path snapshot_131
+ID 515 gen 143 top level 256 path snapshot_132
+ID 516 gen 144 top level 256 path snapshot_133
+ID 518 gen 145 top level 256 path snapshot_134
+ID 519 gen 146 top level 256 path snapshot_135
+ID 520 gen 147 top level 256 path snapshot_136
+ID 522 gen 148 top level 256 path snapshot_137
+ID 523 gen 149 top level 256 path snapshot_138
+ID 524 gen 150 top level 256 path snapshot_139
+ID 526 gen 151 top level 256 path snapshot_140
+ID 527 gen 152 top level 256 path snapshot_141
+ID 528 gen 153 top level 256 path snapshot_142
+ID 529 gen 154 top level 256 path snapshot_143
+ID 531 gen 155 top level 256 path snapshot_144
+ID 532 gen 156 top level 256 path snapshot_145
+ID 534 gen 157 top level 256 path snapshot_146
+ID 536 gen 158 top level 256 path snapshot_147
+ID 537 gen 159 top level 256 path snapshot_148
+ID 538 gen 160 top level 256 path snapshot_149
+ID 540 gen 161 top level 256 path snapshot_150
+ID 541 gen 162 top level 256 path snapshot_151
+ID 542 gen 163 top level 256 path snapshot_152
+ID 543 gen 164 top level 256 path snapshot_153
+ID 545 gen 165 top level 256 path snapshot_154
+ID 546 gen 166 top level 256 path snapshot_155
+ID 547 gen 167 top level 256 path snapshot_156
+ID 549 gen 168 top level 256 path snapshot_157
+ID 550 gen 169 top level 256 path snapshot_158
+ID 551 gen 170 top level 256 path snapshot_159
+ID 553 gen 171 top level 256 path snapshot_160
+ID 554 gen 172 top level 256 path snapshot_161
+ID 555 gen 173 top level 256 path snapshot_162
+ID 557 gen 174 top level 256 path snapshot_163
+ID 558 gen 175 top level 256 path snapshot_165
+ID 560 gen 176 top level 256 path snapshot_164
+ID 562 gen 177 top level 256 path snapshot_166
+ID 563 gen 178 top level 256 path snapshot_168
+ID 564 gen 179 top level 256 path snapshot_167
+ID 566 gen 180 top level 256 path snapshot_169
+ID 567 gen 181 top level 256 path snapshot_170
+ID 568 gen 182 top level 256 path snapshot_171
+ID 570 gen 183 top level 256 path snapshot_175
+ID 571 gen 184 top level 256 path snapshot_172
+ID 572 gen 185 top level 256 path snapshot_174
+ID 574 gen 186 top level 256 path snapshot_173
+ID 575 gen 187 top level 256 path snapshot_180
+ID 577 gen 188 top level 256 path snapshot_179
+ID 578 gen 189 top level 256 path snapshot_177
+ID 580 gen 190 top level 256 path snapshot_178
+ID 582 gen 191 top level 256 path snapshot_181
+ID 584 gen 192 top level 256 path snapshot_176
+ID 585 gen 193 top level 256 path snapshot_183
+ID 587 gen 194 top level 256 path snapshot_186
+ID 588 gen 195 top level 256 path snapshot_185
+ID 590 gen 196 top level 256 path snapshot_184
+ID 591 gen 197 top level 256 path snapshot_182
+ID 593 gen 198 top level 256 path snapshot_191
+ID 594 gen 199 top level 256 path snapshot_187
+ID 596 gen 200 top level 256 path snapshot_188
+ID 598 gen 201 top level 256 path snapshot_189
+ID 600 gen 202 top level 256 path snapshot_192
+ID 602 gen 203 top level 256 path snapshot_190
+ID 603 gen 204 top level 256 path snapshot_197
+ID 605 gen 205 top level 256 path snapshot_208
+ID 607 gen 206 top level 256 path snapshot_200
+ID 608 gen 207 top level 256 path snapshot_193
+ID 610 gen 208 top level 256 path snapshot_195
+ID 612 gen 209 top level 256 path snapshot_194
+ID 613 gen 210 top level 256 path snapshot_199
+ID 615 gen 211 top level 256 path snapshot_196
+ID 618 gen 212 top level 256 path snapshot_202
+ID 620 gen 213 top level 256 path snapshot_211
+ID 621 gen 214 top level 256 path snapshot_201
+ID 623 gen 215 top level 256 path snapshot_206
+ID 625 gen 216 top level 256 path snapshot_207
+ID 627 gen 217 top level 256 path snapshot_210
+ID 629 gen 218 top level 256 path snapshot_213
+ID 631 gen 219 top level 256 path snapshot_198
+ID 633 gen 220 top level 256 path snapshot_212
+ID 635 gen 221 top level 256 path snapshot_205
+ID 638 gen 222 top level 256 path snapshot_204
+ID 639 gen 223 top level 256 path snapshot_209
+ID 641 gen 224 top level 256 path snapshot_203
+ID 643 gen 225 top level 256 path snapshot_214
+ID 644 gen 226 top level 256 path snapshot_223
+ID 646 gen 227 top level 256 path snapshot_221
+ID 647 gen 228 top level 256 path snapshot_218
+ID 648 gen 229 top level 256 path snapshot_215
+ID 650 gen 230 top level 256 path snapshot_240
+ID 651 gen 232 top level 256 path snapshot_220
+ID 652 gen 233 top level 256 path snapshot_216
+ID 653 gen 234 top level 256 path snapshot_227
+ID 654 gen 235 top level 256 path snapshot_226
+ID 656 gen 236 top level 256 path snapshot_238
+ID 657 gen 237 top level 256 path snapshot_230
+ID 658 gen 238 top level 256 path snapshot_250
+ID 659 gen 239 top level 256 path snapshot_219
+ID 660 gen 240 top level 256 path snapshot_231
+ID 661 gen 241 top level 256 path snapshot_242
+ID 662 gen 242 top level 256 path snapshot_217
+ID 663 gen 243 top level 256 path snapshot_225
+ID 664 gen 244 top level 256 path snapshot_245
+ID 665 gen 245 top level 256 path snapshot_224
+ID 666 gen 246 top level 256 path snapshot_244
+ID 667 gen 247 top level 256 path snapshot_232
+ID 668 gen 248 top level 256 path snapshot_253
+ID 669 gen 249 top level 256 path snapshot_246
+ID 670 gen 250 top level 256 path snapshot_228
+ID 671 gen 251 top level 256 path snapshot_241
+ID 672 gen 252 top level 256 path snapshot_270
+ID 673 gen 253 top level 256 path snapshot_264
+ID 674 gen 254 top level 256 path snapshot_243
+ID 675 gen 255 top level 256 path snapshot_269
+ID 676 gen 256 top level 256 path snapshot_265
+ID 677 gen 257 top level 256 path snapshot_239
+ID 678 gen 258 top level 256 path snapshot_247
+ID 679 gen 259 top level 256 path snapshot_237
+ID 680 gen 260 top level 256 path snapshot_248
+ID 681 gen 261 top level 256 path snapshot_235
+ID 682 gen 262 top level 256 path snapshot_256
+ID 683 gen 263 top level 256 path snapshot_229
+ID 684 gen 264 top level 256 path snapshot_262
+ID 685 gen 265 top level 256 path snapshot_252
+ID 686 gen 266 top level 256 path snapshot_263
+ID 687 gen 267 top level 256 path snapshot_267
+ID 688 gen 268 top level 256 path snapshot_259
+ID 689 gen 269 top level 256 path snapshot_268
+ID 690 gen 270 top level 256 path snapshot_254
+ID 691 gen 271 top level 256 path snapshot_261
+ID 692 gen 272 top level 256 path snapshot_255
+ID 693 gen 273 top level 256 path snapshot_272
+ID 694 gen 274 top level 256 path snapshot_236
+ID 695 gen 275 top level 256 path snapshot_258
+ID 696 gen 276 top level 256 path snapshot_271
+ID 697 gen 277 top level 256 path snapshot_234
+ID 698 gen 278 top level 256 path snapshot_260
+ID 699 gen 279 top level 256 path snapshot_251
+ID 700 gen 280 top level 256 path snapshot_257
+ID 701 gen 281 top level 256 path snapshot_222
+ID 702 gen 282 top level 256 path snapshot_233
+ID 703 gen 283 top level 256 path snapshot_266
+ID 704 gen 284 top level 256 path snapshot_249
+ID 705 gen 285 top level 256 path snapshot_297
+
+ID 256 gen 347 top level 5 path fio
+ID 259 gen 10 top level 256 path snapshot_1
+ID 260 gen 13 top level 256 path snapshot_2
+ID 261 gen 17 top level 256 path snapshot_3
+ID 272 gen 20 top level 256 path snapshot_4
+ID 273 gen 23 top level 256 path snapshot_5
+ID 274 gen 26 top level 256 path snapshot_8
+ID 275 gen 29 top level 256 path snapshot_9
+ID 276 gen 32 top level 256 path snapshot_6
+ID 277 gen 35 top level 256 path snapshot_7
+ID 278 gen 39 top level 256 path snapshot_10
+ID 289 gen 42 top level 256 path snapshot_17
+ID 290 gen 45 top level 256 path snapshot_14
+ID 291 gen 48 top level 256 path snapshot_12
+ID 292 gen 51 top level 256 path snapshot_16
+ID 293 gen 54 top level 256 path snapshot_20
+ID 294 gen 57 top level 256 path snapshot_11
+ID 295 gen 60 top level 256 path snapshot_19
+ID 296 gen 63 top level 256 path snapshot_15
+ID 297 gen 66 top level 256 path snapshot_13
+ID 298 gen 69 top level 256 path snapshot_18
+ID 299 gen 73 top level 256 path snapshot_21
+ID 310 gen 76 top level 256 path snapshot_29
+ID 311 gen 79 top level 256 path snapshot_23
+ID 312 gen 82 top level 256 path snapshot_24
+ID 313 gen 85 top level 256 path snapshot_27
+ID 314 gen 88 top level 256 path snapshot_26
+ID 315 gen 91 top level 256 path snapshot_28
+ID 316 gen 94 top level 256 path snapshot_25
+ID 317 gen 97 top level 256 path snapshot_22
+ID 318 gen 100 top level 256 path snapshot_30
+ID 319 gen 103 top level 256 path snapshot_31
+ID 324 gen 106 top level 256 path snapshot_32
+ID 331 gen 109 top level 256 path snapshot_33
+ID 332 gen 112 top level 256 path snapshot_38
+ID 333 gen 115 top level 256 path snapshot_34
+ID 334 gen 118 top level 256 path snapshot_35
+ID 335 gen 121 top level 256 path snapshot_36
+ID 336 gen 124 top level 256 path snapshot_37
+ID 337 gen 127 top level 256 path snapshot_40
+ID 344 gen 130 top level 256 path snapshot_39
+ID 349 gen 133 top level 256 path snapshot_43
+ID 350 gen 136 top level 256 path snapshot_49
+ID 351 gen 139 top level 256 path snapshot_46
+ID 352 gen 142 top level 256 path snapshot_41
+ID 353 gen 145 top level 256 path snapshot_47
+ID 354 gen 148 top level 256 path snapshot_42
+ID 355 gen 151 top level 256 path snapshot_45
+ID 356 gen 154 top level 256 path snapshot_48
+ID 357 gen 157 top level 256 path snapshot_44
+ID 358 gen 161 top level 256 path snapshot_50
+ID 369 gen 164 top level 256 path snapshot_51
+ID 370 gen 167 top level 256 path snapshot_58
+ID 371 gen 170 top level 256 path snapshot_53
+ID 372 gen 173 top level 256 path snapshot_56
+ID 373 gen 176 top level 256 path snapshot_52
+ID 374 gen 179 top level 256 path snapshot_57
+ID 375 gen 182 top level 256 path snapshot_54
+ID 376 gen 185 top level 256 path snapshot_55
+ID 377 gen 188 top level 256 path snapshot_60
+ID 382 gen 191 top level 256 path snapshot_61
+ID 389 gen 194 top level 256 path snapshot_59
+ID 390 gen 197 top level 256 path snapshot_62
+ID 391 gen 200 top level 256 path snapshot_65
+ID 392 gen 203 top level 256 path snapshot_67
+ID 393 gen 206 top level 256 path snapshot_66
+ID 394 gen 209 top level 256 path snapshot_68
+ID 395 gen 212 top level 256 path snapshot_64
+ID 396 gen 215 top level 256 path snapshot_63
+ID 397 gen 218 top level 256 path snapshot_69
+ID 398 gen 222 top level 256 path snapshot_70
+ID 409 gen 225 top level 256 path snapshot_75
+ID 410 gen 228 top level 256 path snapshot_73
+ID 411 gen 231 top level 256 path snapshot_76
+ID 412 gen 234 top level 256 path snapshot_72
+ID 413 gen 237 top level 256 path snapshot_71
+ID 414 gen 240 top level 256 path snapshot_74
+ID 415 gen 243 top level 256 path snapshot_77
+ID 416 gen 246 top level 256 path snapshot_78
+ID 417 gen 249 top level 256 path snapshot_79
+ID 418 gen 252 top level 256 path snapshot_80
+ID 419 gen 256 top level 256 path snapshot_81
+ID 420 gen 260 top level 256 path snapshot_82
+ID 422 gen 264 top level 256 path snapshot_83
+ID 423 gen 267 top level 256 path snapshot_84
+ID 424 gen 270 top level 256 path snapshot_85
+ID 425 gen 274 top level 256 path snapshot_86
+ID 427 gen 278 top level 256 path snapshot_87
+ID 428 gen 283 top level 256 path snapshot_88
+ID 430 gen 287 top level 256 path snapshot_89
+ID 431 gen 290 top level 256 path snapshot_90
+ID 432 gen 293 top level 256 path snapshot_92
+ID 433 gen 296 top level 256 path snapshot_91
+ID 434 gen 300 top level 256 path snapshot_93
+ID 436 gen 304 top level 256 path snapshot_94
+ID 437 gen 308 top level 256 path snapshot_96
+ID 439 gen 314 top level 256 path snapshot_95
+ID 440 gen 317 top level 256 path snapshot_98
+ID 442 gen 320 top level 256 path snapshot_99
+ID 443 gen 323 top level 256 path snapshot_97
+ID 444 gen 326 top level 256 path snapshot_101
+ID 445 gen 329 top level 256 path snapshot_100
+ID 446 gen 333 top level 256 path snapshot_102
+ID 447 gen 336 top level 256 path snapshot_103
+ID 448 gen 340 top level 256 path snapshot_104
+ID 450 gen 343 top level 256 path snapshot_105
+ID 451 gen 347 top level 256 path snapshot_106
+ID 453 gen 347 top level 256 path snapshot_107
