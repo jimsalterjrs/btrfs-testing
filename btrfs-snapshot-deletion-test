@@ -1,0 +1,88 @@
+#!/usr/bin/perl
+
+# Check for latency impact of deletion.
+#
+# method: run fio test while destroying a few hundred snapshots.
+
+# save fio results in results/$ARGV[0] as well as printing to console
+if ($ARGV[0] eq '') { print "Please supply an output filename.\n"; exit 1; }
+my $outfile = "results/$ARGV[0]";
+
+my $parentpid = $$;
+
+# task 0: parent
+# task 1: fio tester
+# task 2: snapshot deleter
+
+# note how many snapshots we started with, and what time we began this process
+my @snaps = `btrfs subvolume list /mnt/source/fio | grep snapshot | sed 's/^.*path //'`;
+my $numsnaps = scalar @snaps;
+my $begintime = time();
+
+my $task = 0;
+my @taskpid;
+until ($task==2 || $parentpid != $$) {
+	$task++;
+	$taskpid[$task] = fork;
+}
+
+if ($parentpid == $$) { $task=0; }
+if ($task == 1) { fiotester(); }
+if ($task == 2) { deleter(); }
+if ($task > 0) { exit 0; }
+
+# If we're still here, we're the parent.
+
+# wait for deleter to complete 
+waitpid $taskpid[2], 0;
+
+# note how long deletion process took in seconds
+my $deletertime = time();
+my $elapsedtime = $deletertime-$begintime;
+
+# kill fio process
+kill 'KILL', $taskpid[1];
+
+# wait for fio to actually exit
+my $ps = 'begin';
+while ($ps ne '') { $ps = `ps wwaux | grep $taskpid[1] | grep fio | grep -v grep`; }
+
+#output number of snapshots killed and time to kill them
+open FH, '>>', $outfile;
+print "\n\n$numsnaps snapshots deleted in $elapsedtime seconds.\n";
+print FH "\n\n$numsnaps snapshots deleted in $elapsedtime seconds.\n";
+close FH;
+
+exit 0;
+
+#####################################################################
+
+sub fiotester {
+	system ("fio fio-test.fio | tee $outfile");
+	exit 0;
+}
+
+sub deleter {
+	# shut up btrfs console spam
+	open STDERR, ">", "/dev/null";
+	open STDOUT, ">", "/dev/null";
+
+	# list all snapshots, then delete them individually
+	my @snaps = `btrfs subvolume list /mnt/source/fio | grep snapshot | sed 's/^.*path //'`;
+	foreach my $snap (@snaps) {
+		system ("btrfs subvolume delete /mnt/source/fio/$snap");
+	}
+
+	# make sure they're all gone--don't exit until btrfs subvolume list shows no more snapshots
+	# for /mnt/source/fio
+	while (scalar @snaps) {
+		@snaps = `btrfs subvolume list /mnt/source/fio | grep snapshot | sed 's/^.*path //'`;
+		sleep 1;
+	}
+
+	# belt and suspenders--make sure no snapshot deletion processes are still running either
+	my $ps = 'begin';
+	while ($ps ne '') { $ps = `ps wwaux | grep 'btrfs subvolume delete /mnt/source' | grep -v grep`; }
+
+	exit 0;
+}
