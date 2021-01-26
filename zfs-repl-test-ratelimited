@@ -1,0 +1,82 @@
+#!/usr/bin/perl
+
+# Check for latency impact of replication to a backup target.
+#
+# method: run fio test while snapshotting and replicating from source to target.
+#
+# Take a new snapshot every five seconds. Replicate stream from source to target
+# every twenty seconds.
+
+# save fio results in results/$ARGV[0] as well as printing to console
+if ($ARGV[0] eq '') { print "Please supply an output filename.\n"; exit 1; }
+my $outfile = "results/$ARGV[0]";
+
+my $parentpid = $$;
+
+# task 0: parent
+# task 1: fio test
+# task 2: take snapshots
+# task 3: replicator
+
+my $task = 0;
+my @taskpid;
+until ($task==3 || $parentpid != $$) {
+	$task++;
+	$taskpid[$task] = fork;
+}
+
+if ($parentpid == $$) { $task=0; }
+
+if ($task == 1) { fiotester(); }
+if ($task == 2) { snapshotter(); }
+if ($task == 3) { replicator(); }
+
+if ($task > 0) { exit 0; }
+
+# If we're still here, we're the parent.
+
+# wait for fio tester to complete
+waitpid $taskpid[1], 0;
+
+# kill the snapshotter and replicator now that fio is done
+system ("kill $taskpid[2]");
+system ("kill $taskpid[3]");
+
+# append snapshot list to results file
+system ("zfs list -rt snap source/fio >> $outfile");
+system ("zfs list -rt snap target/fio >> $outfile");
+exit 0;
+
+#####################################################################
+
+sub fiotester {
+        system ("fio fio-test-ratelimited.fio | tee $outfile");
+	exit 0;
+}
+
+sub snapshotter {
+	# shut up btrfs console spam
+	# open STDERR, ">", "/dev/null";
+	# open STDOUT, ">", "/dev/null";
+
+	my $snapnum = 2;
+	while (1) {
+		# take snapshot, don't wait for the process to return
+		system ("zfs snapshot source/fio\@snapshot_$snapnum &");
+		$snapnum++;
+		sleep 5;
+	}
+}
+
+sub replicator {
+	# shut up console spam from zfs-replicate script
+	open STDERR, ">", "/dev/null";
+	open STDOUT, ">", "/dev/null";
+
+	while (1) {
+		# replicate stream, don't wait for the process to return
+		system ("./zfs-replicate &");
+		sleep 20;
+	}
+}
+

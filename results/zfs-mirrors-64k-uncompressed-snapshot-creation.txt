@@ -1,0 +1,264 @@
+job1: (g=0): rw=randrw, bs=(R) 64.0KiB-64.0KiB, (W) 64.0KiB-64.0KiB, (T) 64.0KiB-64.0KiB, ioengine=libaio, iodepth=8
+...
+fio-3.16
+Starting 8 processes
+job1: Laying out IO file (1 file / 10240MiB)
+job1: Laying out IO file (1 file / 10240MiB)
+job1: Laying out IO file (1 file / 10240MiB)
+job1: Laying out IO file (1 file / 10240MiB)
+job1: Laying out IO file (1 file / 10240MiB)
+job1: Laying out IO file (1 file / 10240MiB)
+job1: Laying out IO file (1 file / 10240MiB)
+job1: Laying out IO file (1 file / 10240MiB)
+
+job1: (groupid=0, jobs=8): err= 0: pid=240958: Sun Jan  3 01:29:20 2021
+  read: IOPS=414, BW=25.9MiB/s (27.2MB/s)(20.0GiB/790637msec)
+    slat (usec): min=9, max=639423, avg=17126.04, stdev=28075.06
+    clat (usec): min=106, max=785441, avg=30424.41, stdev=44539.33
+     lat (usec): min=165, max=851265, avg=47551.50, stdev=55345.69
+    clat percentiles (usec):
+     |  1.00th=[   239],  5.00th=[   529], 10.00th=[   570], 20.00th=[  1287],
+     | 30.00th=[  8455], 40.00th=[ 14091], 50.00th=[ 20055], 60.00th=[ 26870],
+     | 70.00th=[ 35390], 80.00th=[ 47449], 90.00th=[ 67634], 95.00th=[ 88605],
+     | 99.00th=[160433], 99.50th=[341836], 99.90th=[566232], 99.95th=[608175],
+     | 99.99th=[683672]
+   bw (  KiB/s): min=  814, max=323385, per=100.00%, avg=29421.71, stdev=5459.11, samples=11369
+   iops        : min=    9, max= 5051, avg=457.33, stdev=85.31, samples=11369
+  write: IOPS=1243, BW=77.7MiB/s (81.5MB/s)(59.0GiB/790637msec); 0 zone resets
+    slat (usec): min=13, max=442105, avg=67.59, stdev=920.47
+    clat (usec): min=2, max=835412, avg=30537.68, stdev=44945.69
+     lat (usec): min=43, max=835459, avg=30605.62, stdev=44968.16
+    clat percentiles (usec):
+     |  1.00th=[   239],  5.00th=[   515], 10.00th=[   545], 20.00th=[  1287],
+     | 30.00th=[  8586], 40.00th=[ 14222], 50.00th=[ 20055], 60.00th=[ 27132],
+     | 70.00th=[ 35390], 80.00th=[ 47449], 90.00th=[ 67634], 95.00th=[ 89654],
+     | 99.00th=[162530], 99.50th=[354419], 99.90th=[566232], 99.95th=[616563],
+     | 99.99th=[683672]
+   bw (  KiB/s): min=  912, max=995757, per=100.00%, avg=88150.25, stdev=16305.02, samples=11397
+   iops        : min=   11, max=15557, avg=1375.03, stdev=254.77, samples=11397
+  lat (usec)   : 4=0.01%, 100=0.01%, 250=1.32%, 500=3.20%, 750=14.15%
+  lat (usec)   : 1000=0.69%
+  lat (msec)   : 2=1.28%, 4=1.70%, 10=10.55%, 20=17.07%, 50=31.73%
+  lat (msec)   : 100=14.72%, 250=2.91%, 500=0.50%, 750=0.17%, 1000=0.01%
+  cpu          : usr=0.62%, sys=1.39%, ctx=340895, majf=0, minf=110
+  IO depths    : 1=0.1%, 2=0.1%, 4=0.1%, 8=100.0%, 16=0.0%, 32=0.0%, >=64=0.0%
+     submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     complete  : 0=0.0%, 4=100.0%, 8=0.1%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     issued rwts: total=327734,982986,0,8 short=0,0,0,0 dropped=0,0,0,0
+     latency   : target=0, window=0, percentile=100.00%, depth=8
+
+Run status group 0 (all jobs):
+   READ: bw=25.9MiB/s (27.2MB/s), 25.9MiB/s-25.9MiB/s (27.2MB/s-27.2MB/s), io=20.0GiB (21.5GB), run=790637-790637msec
+  WRITE: bw=77.7MiB/s (81.5MB/s), 77.7MiB/s-77.7MiB/s (81.5MB/s-81.5MB/s), io=59.0GiB (64.4GB), run=790637-790637msec
+NAME                      USED  AVAIL     REFER  MOUNTPOINT
+source/fio@snapshot_1       0B      -       96K  -
+source/fio@snapshot_2       0B      -       96K  -
+source/fio@snapshot_3     120K      -     4.41G  -
+source/fio@snapshot_4     104K      -     6.40G  -
+source/fio@snapshot_5      88K      -     8.40G  -
+source/fio@snapshot_6       0B      -     10.0G  -
+source/fio@snapshot_7       0B      -     10.0G  -
+source/fio@snapshot_8      72K      -     12.3G  -
+source/fio@snapshot_9     152K      -     14.3G  -
+source/fio@snapshot_10    152K      -     16.3G  -
+source/fio@snapshot_11    152K      -     18.3G  -
+source/fio@snapshot_12     48K      -     20.0G  -
+source/fio@snapshot_14    120K      -     20.7G  -
+source/fio@snapshot_15     96K      -     24.7G  -
+source/fio@snapshot_13     80K      -     26.7G  -
+source/fio@snapshot_18    144K      -     28.7G  -
+source/fio@snapshot_19    112K      -     30.6G  -
+source/fio@snapshot_16    104K      -     32.6G  -
+source/fio@snapshot_17    112K      -     34.6G  -
+source/fio@snapshot_23     88K      -     36.6G  -
+source/fio@snapshot_21    152K      -     38.6G  -
+source/fio@snapshot_25    144K      -     40.5G  -
+source/fio@snapshot_22     88K      -     42.5G  -
+source/fio@snapshot_28     80K      -     44.5G  -
+source/fio@snapshot_20     80K      -     46.5G  -
+source/fio@snapshot_27    152K      -     48.5G  -
+source/fio@snapshot_32     48K      -     50.1G  -
+source/fio@snapshot_24    112K      -     50.5G  -
+source/fio@snapshot_31     96K      -     52.2G  -
+source/fio@snapshot_35    112K      -     54.2G  -
+source/fio@snapshot_33    112K      -     56.2G  -
+source/fio@snapshot_29    128K      -     58.2G  -
+source/fio@snapshot_26     48K      -     60.1G  -
+source/fio@snapshot_39     80K      -     60.4G  -
+source/fio@snapshot_40     88K      -     61.8G  -
+source/fio@snapshot_38     88K      -     65.8G  -
+source/fio@snapshot_34    104K      -     67.8G  -
+source/fio@snapshot_30    144K      -     69.8G  -
+source/fio@snapshot_45     48K      -     70.1G  -
+source/fio@snapshot_43     80K      -     70.4G  -
+source/fio@snapshot_47    112K      -     71.9G  -
+source/fio@snapshot_46    136K      -     75.9G  -
+source/fio@snapshot_36    136K      -     77.9G  -
+source/fio@snapshot_37    128K      -     79.9G  -
+source/fio@snapshot_52    232K      -     80.1G  -
+source/fio@snapshot_50    992K      -     80.1G  -
+source/fio@snapshot_51   14.2M      -     80.1G  -
+source/fio@snapshot_48   29.2M      -     80.1G  -
+source/fio@snapshot_49   94.6M      -     80.1G  -
+source/fio@snapshot_55    110M      -     80.1G  -
+source/fio@snapshot_44    110M      -     80.1G  -
+source/fio@snapshot_59    109M      -     80.1G  -
+source/fio@snapshot_61    105M      -     80.1G  -
+source/fio@snapshot_62   96.9M      -     80.1G  -
+source/fio@snapshot_63   84.7M      -     80.1G  -
+source/fio@snapshot_56   82.3M      -     80.1G  -
+source/fio@snapshot_64   79.3M      -     80.1G  -
+source/fio@snapshot_42   84.9M      -     80.1G  -
+source/fio@snapshot_65   76.3M      -     80.1G  -
+source/fio@snapshot_60   70.5M      -     80.1G  -
+source/fio@snapshot_66   72.9M      -     80.1G  -
+source/fio@snapshot_53   72.8M      -     80.1G  -
+source/fio@snapshot_58   69.0M      -     80.1G  -
+source/fio@snapshot_67   69.8M      -     80.1G  -
+source/fio@snapshot_57   65.9M      -     80.1G  -
+source/fio@snapshot_68   64.7M      -     80.1G  -
+source/fio@snapshot_41   64.6M      -     80.1G  -
+source/fio@snapshot_54   42.9M      -     80.1G  -
+source/fio@snapshot_69   64.5M      -     80.1G  -
+source/fio@snapshot_70   95.2M      -     80.1G  -
+source/fio@snapshot_71   92.8M      -     80.1G  -
+source/fio@snapshot_72    107M      -     80.1G  -
+source/fio@snapshot_73    109M      -     80.1G  -
+source/fio@snapshot_74    109M      -     80.1G  -
+source/fio@snapshot_75    109M      -     80.1G  -
+source/fio@snapshot_76    108M      -     80.1G  -
+source/fio@snapshot_77    108M      -     80.1G  -
+source/fio@snapshot_78    108M      -     80.1G  -
+source/fio@snapshot_79    109M      -     80.1G  -
+source/fio@snapshot_80    109M      -     80.1G  -
+source/fio@snapshot_81    109M      -     80.1G  -
+source/fio@snapshot_82    109M      -     80.1G  -
+source/fio@snapshot_83    109M      -     80.1G  -
+source/fio@snapshot_84    109M      -     80.1G  -
+source/fio@snapshot_85    109M      -     80.1G  -
+source/fio@snapshot_86    109M      -     80.1G  -
+source/fio@snapshot_87    109M      -     80.1G  -
+source/fio@snapshot_88    110M      -     80.1G  -
+source/fio@snapshot_89    109M      -     80.1G  -
+source/fio@snapshot_90    109M      -     80.1G  -
+source/fio@snapshot_91    109M      -     80.1G  -
+source/fio@snapshot_92    110M      -     80.1G  -
+source/fio@snapshot_93    109M      -     80.1G  -
+source/fio@snapshot_94    109M      -     80.1G  -
+source/fio@snapshot_95    109M      -     80.1G  -
+source/fio@snapshot_96    110M      -     80.1G  -
+source/fio@snapshot_97    110M      -     80.1G  -
+source/fio@snapshot_98    110M      -     80.1G  -
+source/fio@snapshot_99    109M      -     80.1G  -
+source/fio@snapshot_100   108M      -     80.1G  -
+source/fio@snapshot_101   107M      -     80.1G  -
+source/fio@snapshot_102   108M      -     80.1G  -
+source/fio@snapshot_103   108M      -     80.1G  -
+source/fio@snapshot_104   107M      -     80.1G  -
+source/fio@snapshot_105   106M      -     80.1G  -
+source/fio@snapshot_106   106M      -     80.1G  -
+source/fio@snapshot_107   104M      -     80.1G  -
+source/fio@snapshot_108   101M      -     80.1G  -
+source/fio@snapshot_109  98.5M      -     80.1G  -
+source/fio@snapshot_110  94.9M      -     80.1G  -
+source/fio@snapshot_111  95.8M      -     80.1G  -
+source/fio@snapshot_112  96.1M      -     80.1G  -
+source/fio@snapshot_113  96.5M      -     80.1G  -
+source/fio@snapshot_114  96.7M      -     80.1G  -
+source/fio@snapshot_115  96.7M      -     80.1G  -
+source/fio@snapshot_116  97.3M      -     80.1G  -
+source/fio@snapshot_117  98.6M      -     80.1G  -
+source/fio@snapshot_118  99.5M      -     80.1G  -
+source/fio@snapshot_119   100M      -     80.1G  -
+source/fio@snapshot_120   102M      -     80.1G  -
+source/fio@snapshot_121   102M      -     80.1G  -
+source/fio@snapshot_122   103M      -     80.1G  -
+source/fio@snapshot_123   104M      -     80.1G  -
+source/fio@snapshot_124   104M      -     80.1G  -
+source/fio@snapshot_125   103M      -     80.1G  -
+source/fio@snapshot_126   103M      -     80.1G  -
+source/fio@snapshot_127   104M      -     80.1G  -
+source/fio@snapshot_128   104M      -     80.1G  -
+source/fio@snapshot_129   104M      -     80.1G  -
+source/fio@snapshot_130   104M      -     80.1G  -
+source/fio@snapshot_131   104M      -     80.1G  -
+source/fio@snapshot_132   104M      -     80.1G  -
+source/fio@snapshot_133   105M      -     80.1G  -
+source/fio@snapshot_134   104M      -     80.1G  -
+source/fio@snapshot_135   103M      -     80.1G  -
+source/fio@snapshot_136   104M      -     80.1G  -
+source/fio@snapshot_137   104M      -     80.1G  -
+source/fio@snapshot_138   104M      -     80.1G  -
+source/fio@snapshot_139   104M      -     80.1G  -
+source/fio@snapshot_140   103M      -     80.1G  -
+source/fio@snapshot_141   104M      -     80.1G  -
+source/fio@snapshot_142   104M      -     80.1G  -
+source/fio@snapshot_143   104M      -     80.1G  -
+source/fio@snapshot_144   104M      -     80.1G  -
+source/fio@snapshot_145   104M      -     80.1G  -
+source/fio@snapshot_146   104M      -     80.1G  -
+source/fio@snapshot_147   104M      -     80.1G  -
+source/fio@snapshot_148   103M      -     80.1G  -
+source/fio@snapshot_149   103M      -     80.1G  -
+source/fio@snapshot_150   104M      -     80.1G  -
+source/fio@snapshot_151   105M      -     80.1G  -
+source/fio@snapshot_152   104M      -     80.1G  -
+source/fio@snapshot_153   103M      -     80.1G  -
+source/fio@snapshot_154   103M      -     80.1G  -
+source/fio@snapshot_155   104M      -     80.1G  -
+source/fio@snapshot_156   104M      -     80.1G  -
+source/fio@snapshot_157   104M      -     80.1G  -
+source/fio@snapshot_158   104M      -     80.1G  -
+source/fio@snapshot_159   103M      -     80.1G  -
+source/fio@snapshot_160   103M      -     80.1G  -
+source/fio@snapshot_161   103M      -     80.1G  -
+source/fio@snapshot_162   103M      -     80.1G  -
+source/fio@snapshot_163   104M      -     80.1G  -
+source/fio@snapshot_164   104M      -     80.1G  -
+source/fio@snapshot_165   104M      -     80.1G  -
+source/fio@snapshot_166   104M      -     80.1G  -
+source/fio@snapshot_167   104M      -     80.1G  -
+source/fio@snapshot_168   104M      -     80.1G  -
+source/fio@snapshot_169   104M      -     80.1G  -
+source/fio@snapshot_170   104M      -     80.1G  -
+source/fio@snapshot_171   104M      -     80.1G  -
+source/fio@snapshot_172   104M      -     80.1G  -
+source/fio@snapshot_173   104M      -     80.1G  -
+source/fio@snapshot_174   103M      -     80.1G  -
+source/fio@snapshot_175   104M      -     80.1G  -
+source/fio@snapshot_176   104M      -     80.1G  -
+source/fio@snapshot_177   104M      -     80.1G  -
+source/fio@snapshot_178   103M      -     80.1G  -
+source/fio@snapshot_179   103M      -     80.1G  -
+source/fio@snapshot_180   104M      -     80.1G  -
+source/fio@snapshot_181   104M      -     80.1G  -
+source/fio@snapshot_182   103M      -     80.1G  -
+source/fio@snapshot_183   104M      -     80.1G  -
+source/fio@snapshot_184   104M      -     80.1G  -
+source/fio@snapshot_185   104M      -     80.1G  -
+source/fio@snapshot_186   104M      -     80.1G  -
+source/fio@snapshot_187   104M      -     80.1G  -
+source/fio@snapshot_188   104M      -     80.1G  -
+source/fio@snapshot_189   104M      -     80.1G  -
+source/fio@snapshot_190   103M      -     80.1G  -
+source/fio@snapshot_191   103M      -     80.1G  -
+source/fio@snapshot_192   104M      -     80.1G  -
+source/fio@snapshot_193   104M      -     80.1G  -
+source/fio@snapshot_194   104M      -     80.1G  -
+source/fio@snapshot_195   103M      -     80.1G  -
+source/fio@snapshot_196   103M      -     80.1G  -
+source/fio@snapshot_197   102M      -     80.1G  -
+source/fio@snapshot_198   102M      -     80.1G  -
+source/fio@snapshot_199   100M      -     80.1G  -
+source/fio@snapshot_200  99.3M      -     80.1G  -
+source/fio@snapshot_201  97.4M      -     80.1G  -
+source/fio@snapshot_202  92.5M      -     80.1G  -
+source/fio@snapshot_203  88.8M      -     80.1G  -
+source/fio@snapshot_204  81.7M      -     80.1G  -
+source/fio@snapshot_205  78.5M      -     80.1G  -
+source/fio@snapshot_206  71.2M      -     80.1G  -
+source/fio@snapshot_207  59.9M      -     80.1G  -
+source/fio@snapshot_208  44.9M      -     80.1G  -
+source/fio@snapshot_209  32.6M      -     80.1G  -
+source/fio@snapshot_210  20.5M      -     80.1G  -
+source/fio@snapshot_211     0B      -     80.1G  -
