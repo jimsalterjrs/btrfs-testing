@@ -6,13 +6,13 @@
 my $btrfslevel = "raid1";
 if ($ARGV[0] eq '') {
 	print "RAID level not specified: defaulting to btrfs-raid1.\n";
-	print "(If you want a different level, please specify by full name: eg btrfs-raid10, not just raid10 or 10.)\n";
-} elsif ($ARGV[0] =~ /^btrfs-raid\d+?$/) {
+	print "(If you want a different level, please specify by full name: eg raid10, not just 10.)\n";
+} elsif ($ARGV[0] =~ /^raid\d+?$/) {
 	print "Creating /mnt/source and /mnt/target with level $ARGV[0].\n";
 	$btrfslevel = $ARGV[0];
 } else {
 	print "ERROR: $ARGV[0] is not a valid btrfs RAID level.\n";
-	print "please specify btrfs RAID level in full, eg btrfs-raid1, btrfs-raid10, etc.\n";
+	print "please specify btrfs RAID level in full, eg raid1, raid10, etc.\n";
 	exit 1;
 }
 
